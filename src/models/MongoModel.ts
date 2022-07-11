@@ -24,7 +24,7 @@ abstract class MongoModel<T> implements Model<T> {
 
   delete = async (id: string): Promise<T | null> => {
     if (!isValidObjectId(id)) return null;
-    const result = await this._modelMongoose.deleteOne({ _id: id });
+    const result = await this._modelMongoose.findOneAndDelete({ _id: id });
     return result as T | null;
   };
 }
