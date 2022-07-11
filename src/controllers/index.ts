@@ -42,7 +42,17 @@ abstract class Controller<T> {
 
   abstract readOne(
     _req: Request<{ id: string; }>,
-    res: Response<T[] | ResponseError>,
+    res: Response<T | ResponseError>,
+  ): Promise<typeof res>;
+
+  abstract update(
+    _req: Request,
+    res: Response<T | ResponseError>,
+  ): Promise<typeof res>;
+
+  abstract delete(
+    req: Request<{ id: string; }>,
+    res: Response<T | ResponseError>
   ): Promise<typeof res>;
 }
 
