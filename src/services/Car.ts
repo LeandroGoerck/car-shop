@@ -1,6 +1,6 @@
 import { Car, CarSchema } from '../interfaces/CarInterface';
 import Service, { ServiceError } from '.';
-import CarModel from '../models/Car';
+import CarModel from '../models/CarModel';
 
 class CarService extends Service<Car> {
   constructor(model = new CarModel()) {
