@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import Service from '../services';
+import { IService } from '../interfaces/IService';
 
 export type ResponseError = {
   error: unknown;
@@ -22,7 +22,11 @@ abstract class Controller<T> {
 
   protected errors = ControllerErrors;
 
-  constructor(protected service: Service<T>) { }
+  private service: IService<T>;
+
+  constructor(service: IService<T>) {
+    this.service = service;
+  }
 
   abstract create(
     req: RequestWithBody<T>,

@@ -1,5 +1,5 @@
-import { Car, CarSchema } from '../interfaces/CarInterface';
 import Service, { ServiceError } from '.';
+import { Car, CarSchema } from '../interfaces/CarInterface';
 import CarModel from '../models/CarModel';
 
 class CarService extends Service<Car> {
