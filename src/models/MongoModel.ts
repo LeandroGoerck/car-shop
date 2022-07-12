@@ -1,4 +1,4 @@
-import { Model as M, Document, isValidObjectId } from 'mongoose';
+import { Model as M, Document, isValidObjectId, UpdateQuery } from 'mongoose';
 import { Model } from '../interfaces/ModelInterface';
 
 abstract class MongoModel<T> implements Model<T> {
@@ -13,19 +13,17 @@ abstract class MongoModel<T> implements Model<T> {
 
   update = async (id: string, obj: T): Promise<T | null> => {
     if (!isValidObjectId(id)) return null;
-    const result = await this._modelMongoose
+    return this._modelMongoose
       .findOneAndUpdate(
         { _id: id },
-        { entity: obj },
+        obj as UpdateQuery<T>,
         { returnOriginal: false },
       );
-    return result;
   };
 
   delete = async (id: string): Promise<T | null> => {
     if (!isValidObjectId(id)) return null;
-    const result = await this._modelMongoose.findOneAndDelete({ _id: id });
-    return result as T | null;
+    return this._modelMongoose.findOneAndDelete({ _id: id });
   };
 }
 

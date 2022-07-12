@@ -57,7 +57,7 @@ class CarController extends Controller<Car> {
     const { id } = req.params;
     const { body } = req;
     try {
-      const car = await this.service.update(id, body);
+      const car = await this.service.update(id, body as Car);
       if (!car) {
         return res.status(404).json({ error: this.errors.notFound });
       }
