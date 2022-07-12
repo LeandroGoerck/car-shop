@@ -40,6 +40,9 @@ class CarController extends Controller<Car> {
     res: Response<Car | ResponseError>,
   ): Promise<typeof res> => {
     const { id } = req.params;
+    if (id.length < 24) {
+      return res.status(400).json({ error: this.errors.requiredIdlength });
+    }
     try {
       const car = await this.service.readOne(id);
       return car
@@ -55,7 +58,11 @@ class CarController extends Controller<Car> {
     res: Response<Car | ResponseError>,
   ): Promise<typeof res> => {
     const { id } = req.params;
+    if (id.length < 24) {
+      return res.status(400).json({ error: this.errors.requiredIdlength });
+    }
     const { body } = req;
+    if (!body) return res.status(400).json({ error: this.errors.badRequest });
     try {
       const car = await this.service.update(id, body as Car);
       if (!car) {
@@ -72,10 +79,13 @@ class CarController extends Controller<Car> {
     res: Response<Car | ResponseError>,
   ): Promise<typeof res> => {
     const { id } = req.params;
+    if (id.length < 24) {
+      return res.status(400).json({ error: this.errors.requiredIdlength });
+    }
     try {
       const car = await this.service.delete(id);
       return car
-        ? res.status(200).json(car)
+        ? res.status(204).json(car)
         : res.status(404).json({ error: this.errors.notFound });
     } catch (error) {
       return res.status(500).json({ error: this.errors.internal });
