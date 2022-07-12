@@ -7,26 +7,26 @@ import mocks from '../mocks/mocks';
 describe('Test CarModel Layer', () => {
 
   describe('Can create a new Car', () => {
-    before(() => { sinon.stub(Model, 'create').resolves(mocks.carResolves) })
+    before(() => { sinon.stub(Model, 'create').resolves(mocks.oneCar) })
 
     after(() => { (Model.create as SinonStub).restore() })
 
     it('resolves the created car object', async () => {
       const carModel = new CarModel();
       const createdCar = await carModel.create(mocks.carBody);
-      expect(createdCar).to.be.deep.equal(mocks.carResolves);
+      expect(createdCar).to.be.deep.equal(mocks.oneCar);
     })
   })
 
   describe('Can get One Car by Id', () => {
-    before(() => { sinon.stub(Model, 'findOne').resolves(mocks.carResolves) })
+    before(() => { sinon.stub(Model, 'findOne').resolves(mocks.oneCar) })
 
     after(() => { (Model.findOne as SinonStub).restore() })
 
     it('resolves the correct car object', async () => {
       const carModel = new CarModel();
       const createdCar = await carModel.readOne(mocks.carId);
-      expect(createdCar).to.be.deep.equal(mocks.carResolves);
+      expect(createdCar).to.be.deep.equal(mocks.oneCar);
     })
   })
 
@@ -43,14 +43,14 @@ describe('Test CarModel Layer', () => {
   })
 
   describe('Can update One Car by Id', () => {
-      before(() => { sinon.stub(Model, 'findOneAndUpdate').resolves(mocks.carResolves) })
+      before(() => { sinon.stub(Model, 'findOneAndUpdate').resolves(mocks.oneCar) })
   
       after(() => { (Model.findOneAndUpdate as SinonStub).restore() })
   
       it('Can delete One Car by Id', async () => {
         const carModel = new CarModel();
         const updatedCar = await carModel.update(mocks.carId, mocks.carBody);
-        expect(updatedCar).to.be.deep.equal(mocks.carResolves);
+        expect(updatedCar).to.be.deep.equal(mocks.oneCar);
       })
     })
 
@@ -67,14 +67,14 @@ describe('Test CarModel Layer', () => {
     })
 
     describe('Can delete One Car by Id', () => {
-      before(() => { sinon.stub(Model, 'findOneAndDelete').resolves(mocks.carResolves) })
+      before(() => { sinon.stub(Model, 'findOneAndDelete').resolves(mocks.oneCar) })
   
       after(() => { (Model.findOneAndDelete as SinonStub).restore() })
   
       it('resolves the correct car object', async () => {
         const carModel = new CarModel();
         const updatedCar = await carModel.delete(mocks.carId);
-        expect(updatedCar).to.be.deep.equal(mocks.carResolves);
+        expect(updatedCar).to.be.deep.equal(mocks.oneCar);
       })
     })
 
